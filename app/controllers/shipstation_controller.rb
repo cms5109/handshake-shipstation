@@ -81,7 +81,7 @@ class ShipstationController < ApplicationController
 										@xml.Quantity line["qty"]
 										@xml.UnitPrice line["unitPrice"]
 										@xml.Location
-										@xml.Adjustment
+										@xml.Adjustment(false)
 									}
 								end
 							end
