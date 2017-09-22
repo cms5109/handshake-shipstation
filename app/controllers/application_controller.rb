@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
 	# end
 
 	def required_keys
-		['SS-Username', 'SS-Password']
+		['SS-UserName', 'SS-Password']
 	end
 
 	private

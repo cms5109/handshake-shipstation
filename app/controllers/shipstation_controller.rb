@@ -2,7 +2,7 @@ class ShipstationController < ApplicationController
 	before_action :validate_params
 
 	def index
-		api_key = params['SS-Username']
+		api_key = params['SS-UserName']
 		password = params['SS-Password']
 		action = params['action']
 		offset = page_to_offset(params['page']) if params['page']
