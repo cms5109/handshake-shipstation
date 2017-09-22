@@ -40,7 +40,7 @@ class ShipstationController < ApplicationController
 						@xml.ShippingMethod(cdata(order["shippingMethod"]))
 						@xml.PaymentMethod(cdata(order["paymentTerms"]))
 						@xml.OrderTotal(order["totalAmount"])
-						@xml.TaxAmount
+						@xml.TaxAmount("0.00")
 						@xml.ShippingAmount("0.00")
 						@xml.CustomerNotes(cdata(order["notes"]))
 						@xml.Source(cdata(order["sourceType"]))
