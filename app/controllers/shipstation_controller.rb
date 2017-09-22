@@ -76,7 +76,7 @@ class ShipstationController < ApplicationController
 										@xml.SKU cdata(line["sku"])
 										@xml.Name cdata(line["description"])
 										@xml.ImageUrl
-										@xml.Weight
+										@xml.Weight("0.00")
 										@xml.WeightUnits
 										@xml.Quantity line["qty"]
 										@xml.UnitPrice line["unitPrice"]
