@@ -34,9 +34,9 @@ class ShipstationController < ApplicationController
 					@xml.tag!("Order"){
 						@xml.OrderID(cdata(order["objID"]))
 						@xml.OrderNumber(cdata(order["id"]))
-						@xml.OrderDate(order["ctime"])
+						@xml.OrderDate(shipstation_date(order["ctime"]))
 						@xml.OrderStatus(cdata(order["status"]))
-						@xml.LastModified(order["mtime"])
+						@xml.LastModified(shipstation_date(order["mtime"]))
 						@xml.ShippingMethod(cdata(order["shippingMethod"]))
 						@xml.PaymentMethod(cdata(order["paymentTerms"]))
 						@xml.OrderTotal(order["totalAmount"])
@@ -103,6 +103,10 @@ class ShipstationController < ApplicationController
 
 		def cdata(data)
 			"<![CDATA[#{data}]]>" if data
+		end
+
+		def shipstation_date(hs_date)
+			hs_date.to_datetime.strftime("%m/%d/%Y %H:%m")
 		end
 
 
