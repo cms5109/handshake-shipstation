@@ -42,18 +42,18 @@ class ShipstationController < ApplicationController
 						@xml.PaymentMethod(cdata(order["paymentTerms"]))
 						@xml.OrderTotal(order["totalAmount"])
 						@xml.TaxAmount("0.00")
-						#@xml.ShippingAmount("0.00")
+						@xml.ShippingAmount("0.00")
 						@xml.CustomerNotes(cdata(order["notes"]))
 						@xml.Source(cdata(order["sourceType"]))
 						@xml.Customer {
-							@xml.CustomerCode cdata(order["customer"]["id"])
-							@xml.BillTo {
-								@xml.Name cdata(order["customer"]["contact"])
-								@xml.Company cdata(order["customer"]["name"])
-								@xml.Phone cdata(order["customer"]["billTo"]["phone"])
-								@xml.Email cdata(order["customer"]["email"])
+							# @xml.CustomerCode cdata(order["customer"]["id"])
+							# @xml.BillTo {
+							# 	@xml.Name cdata(order["customer"]["contact"])
+							# 	@xml.Company cdata(order["customer"]["name"])
+							# 	@xml.Phone cdata(order["customer"]["billTo"]["phone"])
+							# 	@xml.Email cdata(order["customer"]["email"])
 
-							}
+							# }
 							@xml.ShipTo {
 								@xml.Name cdata(order["customer"]["contact"])
 								@xml.Company cdata(order["customer"]["name"])
