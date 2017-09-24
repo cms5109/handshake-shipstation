@@ -29,6 +29,7 @@ class ShipstationController < ApplicationController
 			#puts JSON.pretty_generate(@results_hash)
 			@xml = ::Builder::XmlMarkup.new(:indent => 3)
 
+			@xml.instruct!
 			@xml.tag!("Orders", pages: pages){
 				@results_hash["response"]["objects"]["object"].each do |order|
 					@xml.tag!("Order"){
