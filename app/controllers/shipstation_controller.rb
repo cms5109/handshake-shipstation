@@ -63,7 +63,7 @@ class ShipstationController < ApplicationController
 								@xml.State cdata("NY") #cdata(order["shipTo"]["state"])
 								@xml.PostalCode	cdata(order["shipTo"]["postcode"])
 								#@xml.Country cdata(I18nData.country_code(order["shipTo"]["country"].to_s || "US"))
-								@xml.Country "US"
+								@xml.Country cdata("US")
 								@xml.Phone cdata(order["shipTo"]["phone"])
 							}
 						} 
