@@ -36,7 +36,7 @@ class ShipstationController < ApplicationController
 						@xml.OrderID(cdata(order["objID"]))
 						@xml.OrderNumber(cdata(order["id"]))
 						@xml.OrderDate(shipstation_date(order["ctime"]))
-						@xml.OrderStatus(cdata(order["status"]))
+						@xml.OrderStatus("paid")#cdata(order["status"]))
 						@xml.LastModified(shipstation_date(order["mtime"]))
 						@xml.ShippingMethod(cdata(order["shippingMethod"]))
 						@xml.PaymentMethod(cdata(order["paymentTerms"]))
