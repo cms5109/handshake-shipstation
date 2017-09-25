@@ -124,13 +124,13 @@ class ShipstationController < ApplicationController
 						@xml.OrderDate		"9/25/2017 07:00"#shipstation_date(order["ctime"]))
 						@xml.OrderStatus	cdata("paid")#cdata(order["status"]))
 						@xml.LastModified	"9/25/2017 07:00"#shipstation_date(order["mtime"]))
-						@xml.shippingMethod cdata(order["shippingMethod"])
+						@xml.ShippingMethod cdata(order["shippingMethod"])
 						@xml.PaymentMethod	cdata(order["paymentTerms"])
 						@xml.OrderTotal		order["totalAmount"]
 						@xml.TaxAmount		0.00
 						@xml.ShippingAmount	0.00
 						@xml.CustomerNotes	cdata(order["notes"])
-						@xml.sourceType 	cdata(order["sourceType"])
+						@xml.Source 		cdata(order["sourceType"])
 						@xml.Customer {
 							@xml.CustomerCode 	cdata(order["customer"]["id"])
 							@xml.BillTo {
