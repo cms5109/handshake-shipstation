@@ -35,9 +35,9 @@ class ShipstationController < ApplicationController
 					@xml.tag!("Order"){
 						@xml.OrderID(cdata(order["objID"]))
 						@xml.OrderNumber(cdata(order["id"]))
-						@xml.OrderDate("9/24/2017 07:00")#shipstation_date(order["ctime"]))
+						@xml.OrderDate("9/25/2017 07:00")#shipstation_date(order["ctime"]))
 						@xml.OrderStatus(cdata("paid"))#cdata(order["status"]))
-						@xml.LastModified(shipstation_date(order["mtime"]))
+						@xml.LastModified("9/25/2017 07:00")#shipstation_date(order["mtime"]))
 						@xml.ShippingMethod(cdata(order["shippingMethod"]))
 						@xml.PaymentMethod(cdata(order["paymentTerms"]))
 						@xml.OrderTotal(order["totalAmount"])
@@ -63,7 +63,7 @@ class ShipstationController < ApplicationController
 								@xml.State cdata("NY") #cdata(order["shipTo"]["state"])
 								@xml.PostalCode	cdata(order["shipTo"]["postcode"])
 								#@xml.Country cdata(I18nData.country_code(order["shipTo"]["country"].to_s || "US"))
-								@xml.Country cdata("US")
+								@xml.Country "US"
 								@xml.Phone cdata(order["shipTo"]["phone"])
 							}
 						} 
