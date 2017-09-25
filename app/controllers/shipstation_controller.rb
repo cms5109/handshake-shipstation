@@ -72,9 +72,9 @@ class ShipstationController < ApplicationController
 								lines = lines_object.is_a?(Hash) ? [lines_object] : lines_object
 								lines.each do |line|
 									@xml.Item {
-										@xml.LineItemID 	@xml.cdata!(line["objID"].to_s)
-										@xml.SKU 			@xml.cdata!(line["sku"].to_s)
-										@xml.Name 			@xml.cdata!(line["description"].to_s)
+										@xml.LineItemID 	{ @xml.cdata!(line["objID"].to_s) }
+										@xml.SKU 			{ @xml.cdata!(line["sku"].to_s) }
+										@xml.Name 			{ @xml.cdata!(line["description"].to_s) }
 										@xml.ImageUrl
 										@xml.Weight 		0.00
 										@xml.WeightUnits
