@@ -46,14 +46,14 @@ class ShipstationController < ApplicationController
 						@xml.CustomerNotes(cdata(order["notes"]))
 						@xml.Source(cdata(order["sourceType"]))
 						@xml.Customer {
-							# @xml.CustomerCode cdata(order["customer"]["id"])
-							# @xml.BillTo {
-							# 	@xml.Name cdata(order["customer"]["contact"])
-							# 	@xml.Company cdata(order["customer"]["name"])
-							# 	@xml.Phone cdata(order["customer"]["billTo"]["phone"])
-							# 	@xml.Email cdata(order["customer"]["email"])
+							@xml.CustomerCode cdata(order["customer"]["id"])
+							@xml.BillTo {
+								@xml.Name cdata(order["customer"]["contact"])
+								@xml.Company cdata(order["customer"]["name"])
+								@xml.Phone cdata(order["customer"]["billTo"]["phone"])
+								@xml.Email cdata(order["customer"]["email"])
 
-							# }
+							}
 							@xml.ShipTo {
 								@xml.Name cdata(order["customer"]["contact"])
 								@xml.Company cdata(order["customer"]["name"])
