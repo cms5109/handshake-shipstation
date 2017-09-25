@@ -60,7 +60,7 @@ class ShipstationController < ApplicationController
 								@xml.Address1 	{ @xml.cdata!(order["shipTo"]["street"].to_s) }
 								@xml.Address2 	{ @xml.cdata!(order["shipTo"]["street2"].to_s) }
 								@xml.City 		{ @xml.cdata!(order["shipTo"]["city"].to_s) }
-								@xml.State 		{ @xml.cdata!("NY") } #cdata(order["shipTo"]["state"]) }
+								@xml.State 		{ @xml.cdata!(order["shipTo"]["state"].to_s) }
 								@xml.PostalCode	{ @xml.cdata!(order["shipTo"]["postcode"].to_s) }
 								@xml.Country 	{ @xml.cdata!(I18nData.country_code(order["shipTo"]["country"].to_s) || "US") }
 								@xml.Phone 		{ @xml.cdata!(order["shipTo"]["phone"].to_s) }
