@@ -104,7 +104,7 @@ class ShipstationController < ApplicationController
 		end
 
 		def cdata(data)
-			"<![CDATA[#{data}]]>" if data
+			Nokogiri::XML("<![CDATA[#{data}]]>").to_xml if data
 		end
 
 		def shipstation_date(hs_date)
@@ -119,37 +119,38 @@ class ShipstationController < ApplicationController
 			@xml.tag!("Orders", pages: pages){
 				@results_hash["response"]["objects"]["object"].each do |order|
 					@xml.Order {
-						@xml.OrderID 		cdata(order["objID"])
-						@xml.OrderNumber 	cdata(order["id"])
+						@xml.OrderID 		@xml.cdata!(order["objID"].to_s)
+						@xml.OrderNumber 	@xml.cdata!(order["id"].to_s)
 						@xml.OrderDate		"9/25/2017 07:00"#shipstation_date(order["ctime"]))
-						@xml.OrderStatus	cdata("paid")#cdata(order["status"]))
+						@xml.OrderStatus	@xml.cdata!("paid")#@xml.cdata!(order["status"]))
 						@xml.LastModified	"9/25/2017 07:00"#shipstation_date(order["mtime"]))
-						@xml.ShippingMethod cdata(order["shippingMethod"])
-						@xml.PaymentMethod	cdata(order["paymentTerms"])
+						@xml.ShippingMethod @xml.cdata!(order["shippingMethod"].to_s)
+						@xml.PaymentMethod	@xml.cdata!(order["paymentTerms"].to_s)
 						@xml.OrderTotal		order["totalAmount"]
 						@xml.TaxAmount		0.00
 						@xml.ShippingAmount	0.00
-						@xml.CustomerNotes	cdata(order["notes"])
-						@xml.Source 		cdata(order["sourceType"])
+						@xml.CustomerNotes	@xml.cdata!(order["notes"].to_s)
+						@xml.Source 		@xml.cdata!(order["sourceType"])
 						@xml.Customer {
-							@xml.CustomerCode 	cdata(order["customer"]["id"])
+							@xml.CustomerCode 	@xml.cdata!(order["customer"]["id"].to_s)
 							@xml.BillTo {
-								@xml.Name 		cdata(order["customer"]["contact"])
-								@xml.Company 	cdata(order["customer"]["name"])
-								@xml.Phone 		cdata(order["customer"]["billTo"]["phone"])
-								@xml.Email 		cdata(order["customer"]["email"])
+								@xml.Name 		@xml.cdata!(order["customer"]["contact"].to_s)
+								@xml.Company 	@xml.cdata!(order["customer"]["name"].to_s)
+								@xml.Phone 		@xml.cdata!(order["customer"]["billTo"]["phone"].to_s)
+								@xml.Email 		@xml.cdata!(order["customer"]["email"].to_s)
 
 							}
 							@xml.ShipTo {
-								@xml.Name 			cdata(order["customer"]["contact"])
-								@xml.Company 		cdata(order["customer"]["name"])
-								@xml.Address1 		cdata(order["shipTo"]["street"])
-								@xml.Address2 		cdata(order["shipTo"]["street2"])
-								@xml.City 			cdata(order["shipTo"]["city"])
-								@xml.State 			cdata("NY") #cdata(order["shipTo"]["state"])
-								@xml.PostalCode		cdata(order["shipTo"]["postcode"])
+								@xml.Name 			@xml.cdata!(order["customer"]["contact"].to_s)
+								@xml.Company 		@xml.cdata!(order["customer"]["name"].to_s)
+								@xml.Address1 		@xml.cdata!(order["shipTo"]["street"].to_s)
+								@xml.Address2 		@xml.cdata!(order["shipTo"]["street2"].to_s)
+								
+								@xml.City 			@xml.cdata!(order["shipTo"]["city"].to_s)
+								@xml.State 			@xml.cdata!("NY") #@xml.cdata!(order["shipTo"]["state"])
+								@xml.PostalCode		@xml.cdata!(order["shipTo"]["postcode"].to_s)
 								@xml.Country 		"US"
-								@xml.Phone 			cdata(order["shipTo"]["phone"])
+								@xml.Phone 			@xml.cdata!(order["shipTo"]["phone"].to_s)
 							}
 						} 
 						@xml.Items {
@@ -158,9 +159,9 @@ class ShipstationController < ApplicationController
 								lines = lines_object.is_a?(Hash) ? [lines_object] : lines_object
 								lines.each do |line|
 									@xml.Item {
-										@xml.LineItemID 	cdata(line["objID"])
-										@xml.SKU 			cdata(line["sku"])
-										@xml.Name 			cdata(line["description"])
+										@xml.LineItemID 	@xml.cdata!(line["objID"].to_s)
+										@xml.SKU 			@xml.cdata!(line["sku"].to_s)
+										@xml.Name 			@xml.cdata!(line["description"].to_s)
 										# @xml.ImageUrl
 										@xml.Weight			0.00
 										@xml.WeightUnits	"Pounds"
