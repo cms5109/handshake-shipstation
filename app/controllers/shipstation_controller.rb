@@ -27,7 +27,7 @@ class ShipstationController < ApplicationController
 	end
 
 	def shipnotify
-		puts request.body
+		puts request.body.read
 	end
 
 	private
