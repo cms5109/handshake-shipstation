@@ -40,8 +40,8 @@ class ShipstationController < ApplicationController
 			@xml.tag!("Orders", pages: pages){
 				@results_hash["response"]["objects"]["object"].each do |order|
 					@xml.tag!("Order"){
-						@xml.OrderID			{ @xml.cdata!(order["objID"].to_s) }
-						@xml.OrderNumber		{ @xml.cdata!(order["id"].to_s) }
+						@xml.OrderID			{ @xml.cdata!(order["id"].to_s) }
+						@xml.OrderNumber		{ @xml.cdata!(order["objID"].to_s) }
 						@xml.OrderDate			"9/25/2017 07:00"#shipstation_date(order["ctime"]))
 						@xml.OrderStatus		{ @xml.cdata!(order["status"]) }
 						@xml.LastModified 		"9/25/2017 07:00"#shipstation_date(order["mtime"]))
