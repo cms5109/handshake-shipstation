@@ -21,13 +21,13 @@ class ShipstationController < ApplicationController
 		rescue RestClient::ExceptionWithResponse => err
 			puts err.response
 		else
-			if action = "export"
-				render xml: handshake_to_shipstation(order_export)
-			elsif action = "shipnotify"
-				puts request.body.read
-			end
+			render xml: handshake_to_shipstation(order_export)
 		end
 
+	end
+
+	def shipnotify
+		puts request.body
 	end
 
 	private
