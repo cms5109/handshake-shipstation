@@ -152,12 +152,12 @@ class ShipstationController < ApplicationController
 
 		def handshake_shipping_body(request)
 			shipping_hash = Hash.from_xml(request)
-			puts shipping_hash
+			#puts shipping_hash
 			shipstation_shipment = shipping_hash["ShipNotice"]
 			handshake_shipment = Hash.new
 
 			handshake_shipment["service_level"] = shipstation_shipment["Service"]
-			handshake_shipment["order"] = order_uri(shipstation_shipment["OrderID"])
+			handshake_shipment["order"] = order_uri(shipstation_shipment["OrderNumber"])
 			handshake_shipment["tracking_number"] = shipstation_shipment["TrackingNumber"]
 			handshake_shipment["notes"] = shipstation_shipment["InternalNotes"]
 			handshake_shipment["sent_to"] = sent_to(shipstation_shipment["Recipient"])
