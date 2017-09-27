@@ -54,12 +54,14 @@ class ShipstationController < ApplicationController
 	private
 		def handshake_to_shipstation(results)
 			@results_hash = Hash.from_xml(results)
-			puts JSON.pretty_generate(@results_hash)
+			#puts JSON.pretty_generate(@results_hash)
 			@xml = Builder::XmlMarkup.new
 
 			@xml.instruct!
 			@xml.tag!("Orders", pages: pages){
 				@results_hash["response"]["objects"]["object"].each do |order|
+					#Syntax for only single orders being returned
+					order = order.is_a?(Hash) ? [order] : order
 					@xml.tag!("Order"){
 						@xml.OrderID			{ @xml.cdata!(order["id"].to_s) }
 						@xml.OrderNumber		{ @xml.cdata!(order["objID"].to_s) }
