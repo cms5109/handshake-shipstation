@@ -10,7 +10,7 @@ class ShipstationController < ApplicationController
 		uri_date = handshake_datetime(start_date)
 
 
-		request_uri = "https://#{api_key}:#{password}@app.handshake.com/api/v3/orders?format=xml&limit=50&offset=#{offset}&ctime__gte=#{uri_date}"
+		request_uri = "https://#{api_key}:#{password}@app.handshake.com/api/v3/orders?format=xml&limit=50&offset=#{offset}&mtime__gte=#{uri_date}"
 		puts request_uri
 
 		
@@ -59,10 +59,11 @@ class ShipstationController < ApplicationController
 
 			@xml.instruct!
 			@xml.tag!("Orders", pages: pages){
-				#Syntax for only single orders being returned
+				#Syntax for no orders being returned
 				if @results_hash["response"]["objects"].nil?
 					{}
 				else
+					#Syntax for only one order being returned
 					orders = @results_hash["response"]["objects"]["object"]
 					orders = orders.is_a?(Hash) ? [orders] : orders
 
