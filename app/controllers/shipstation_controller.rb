@@ -152,6 +152,7 @@ class ShipstationController < ApplicationController
 
 		def handshake_shipping_body(request)
 			shipping_hash = Hash.from_xml(request)
+			puts shipping_hash
 			shipstation_shipment = shipping_hash["ShipNotice"]
 			handshake_shipment = Hash.new
 
